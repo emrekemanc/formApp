@@ -12,13 +12,13 @@ loginPagestate createState()=>loginPagestate();
 }
 class loginPagestate extends State<loginPage>{
   final _formKey = GlobalKey<FormState>();
-   late String sifre;
-   late String eposta;
+   late String password;
+   late String eMail;
   @override
   Widget build(BuildContext context) {
    
    return Scaffold(
-    appBar: AppBar(title: Text("Giriş Yap"),
+    appBar: AppBar(title: Text("Login Page"),
     ),
       resizeToAvoidBottomInset: false,
     body:Form(
@@ -32,7 +32,7 @@ class loginPagestate extends State<loginPage>{
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("E-Posta",style: TextStyle(
+                    child: Text("E-Mail",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -47,15 +47,15 @@ class loginPagestate extends State<loginPage>{
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                        return "Lütfen E-Posta Giriniz";
+                        return "Please Enter Your E-Mail ";
                    
                       }else{
                          return value.contains(RegExp(r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}'))? 
-                         null : "Geçerli Eposta değil";
+                         null : "Please Enter In Valid E-Mail";
                       }
                     },
                     onSaved: (newValue) {
-                     eposta=newValue!;
+                     eMail=newValue!;
                    },
                     )         
                ) ],
@@ -69,7 +69,7 @@ class loginPagestate extends State<loginPage>{
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("Şifre",style: TextStyle(
+                    child: Text("Password",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -85,13 +85,13 @@ class loginPagestate extends State<loginPage>{
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                        return "Lütfen Şifre Giriniz";
+                        return "Please Enter Your Password";
                       }else{
                         return null;
                       }
                     },
                    onSaved: (newValue) {
-                     sifre=newValue!;
+                     password=newValue!;
                    },
                     )
                     )
@@ -104,7 +104,7 @@ class loginPagestate extends State<loginPage>{
           minimumSize: Size(200, 40),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))
         ),
-          child: const Text("Giriş Yap",style: TextStyle(
+          child: const Text("Login",style: TextStyle(
             color: Colors.black
             ,fontSize: 17),
             ),
@@ -114,11 +114,10 @@ class loginPagestate extends State<loginPage>{
               }
               try{
              final user= await FirebaseAuth.instance.signInWithEmailAndPassword(
-              email: eposta,
-              password: sifre
+              email: eMail,
+              password: password
              );
              if(user!=null){
-              print("işlem başarılı");
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>mainPage()));
              }
             } on FirebaseAuthException catch(e){

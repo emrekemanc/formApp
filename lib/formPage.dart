@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:formapp/loginPage.dart';
 import 'package:formapp/mainPage.dart';
 
 
@@ -13,46 +14,46 @@ class formPage extends StatefulWidget{
 class formPageState extends State<formPage>{
  
 final _formKey = GlobalKey<FormState>();
-late String adSoyad;
-late String kullaniciAdi;
-late String e_posta;
-late String sifre1;
+late String nameSurname;
+late String nickName;
+late String eMail;
+late String password;
   
    @override
 Widget build(BuildContext context) {
 
-  return Scaffold(appBar: AppBar(title: Text("Kayıt ol"),),
+  return Scaffold(appBar: AppBar(title: Text("Register Page"),),
     resizeToAvoidBottomInset: false,
   body: Form(
     key: _formKey,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        nameAndSurname(),
+        nameAndSurnameClass(),
         SizedBox(height:10),
-        nickName(),
+        nickNameClass(),
         SizedBox(height:10),
-         eMail(),
+         eMailClass(),
          SizedBox(height:10),
-         password(),
+         passwordClass(),
          SizedBox(height:10),
-        login(),
+        loginClass(),
         SizedBox(height: 10,),
-       register()
+       registerClass()
     ]
     ),
   ),
   );
 }
 //Ad Soyad
-Widget nameAndSurname()=>Container(
+Widget nameAndSurnameClass()=>Container(
    child: Column(
             children: [
                const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("Ad Soyad",style: TextStyle(
+                    child: Text("Name And Surname",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -67,14 +68,14 @@ Widget nameAndSurname()=>Container(
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                         return "Adınızı Ve Soyadınızı Giriniz";
+                         return "Please Enter Your Name And Surname";
                       }else{
                        
                         return null;
                       }
                     },
                     onSaved: (newValue) {
-                     adSoyad=newValue!;
+                     nameSurname=newValue!;
                    },
                     )
                     )
@@ -83,14 +84,14 @@ Widget nameAndSurname()=>Container(
           ),
 );
 //kullanici Adi
-Widget nickName()=>Container(
+Widget nickNameClass()=>Container(
 child: Column(
             children: [
                const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("Kullanıcı Adı",style: TextStyle(
+                    child: Text("Nick Name",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -105,13 +106,13 @@ child: Column(
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                        return "Lütfen Kullanıcı Adınızı Giriniz";
+                        return "Please Enter Your Nickname";
                       }else{
                           return null;
                       }
                     },
                   onSaved: (newValue) {
-                     kullaniciAdi=newValue!;
+                     nickName=newValue!;
                    },
                     )
                     )
@@ -120,14 +121,14 @@ child: Column(
           ),
 );
 //E-Posta 
-Widget eMail()=>Container(
+Widget eMailClass()=>Container(
    child: Column(
             children: [
                const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("E-Posta",style: TextStyle(
+                    child: Text("E-Mail",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -142,29 +143,29 @@ Widget eMail()=>Container(
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                        return "Lütfen E-Posta Giriniz";
+                        return "Please Enter Your E-Mail";
                    
                       }else{
                          return value.contains(RegExp(r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}'))? 
-                         null : "Geçerli Eposta değil";
+                         null : "Please Enter In Valid E-Mail";
                       }
                     },
                     onSaved: (newValue) {
-                     e_posta=newValue!;
+                     eMail=newValue!;
                    },
                     )         
     ) ],
           ),
 );
 //Sifre
-Widget password()=>Container(
+Widget passwordClass()=>Container(
   child: Column(
             children: [
                const Row(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left:25),
-                    child: Text("Şifre",style: TextStyle(
+                    child: Text("Password",style: TextStyle(
                       fontSize: 15
                     ),),
                   )
@@ -180,13 +181,13 @@ Widget password()=>Container(
                       ),
                     validator: (value) {
                       if(value!.isEmpty){
-                        return "Lütfen Şifre Giriniz";
+                        return "Please Enter Your Password";
                       }else{
                         return null;
                       }
                     },
                    onSaved: (newValue) {
-                     sifre1=newValue!;
+                     password=newValue!;
                    },
                     )
                     )
@@ -196,28 +197,28 @@ Widget password()=>Container(
 );
 
 //Giriş Yap
-Widget  login()=>Container(
+Widget  loginClass()=>Container(
  child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>loginPage()));
               
-              }, child: Text("Giriş Yap")
+              }, child: Text("Login")
               ),
             )
             ],
           ),
 );
 //Üye Ol
-Widget register()=>ElevatedButton(
+Widget registerClass()=>ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(200, 40),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))
         ),
-          child: const Text("Üye Ol",style: TextStyle(
+          child: const Text("Register",style: TextStyle(
             color: Colors.black
             ,fontSize: 17),
             ),
@@ -225,7 +226,7 @@ Widget register()=>ElevatedButton(
           if(_formKey.currentState!.validate()){
             _formKey.currentState!.save();
             try {
-              final user = FirebaseAuth.instance.createUserWithEmailAndPassword(email: e_posta, password: sifre1);
+              final user = FirebaseAuth.instance.createUserWithEmailAndPassword(email: eMail, password: password);
               if(user!=null){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>mainPage()));
               }

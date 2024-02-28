@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 
 
-class anaSayfa extends StatefulWidget{
+class mainPage extends StatefulWidget{
 @override
 
-anaSayfaState createState()=> anaSayfaState();
+mainPageState createState()=> mainPageState();
 }
-class anaSayfaState extends State<anaSayfa>{
+
+
+class mainPageState extends State<mainPage>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(

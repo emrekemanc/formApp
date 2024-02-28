@@ -1,16 +1,16 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:formapp/anaSayfa.dart';
+import 'package:formapp/mainPage.dart';
 
 
-class login extends StatefulWidget{
+class loginPage extends StatefulWidget{
   @override
   
-loginstate createState()=>loginstate();
+loginPagestate createState()=>loginPagestate();
 
 }
-class loginstate extends State<login>{
+class loginPagestate extends State<loginPage>{
   final _formKey = GlobalKey<FormState>();
    late String sifre;
    late String eposta;
@@ -119,7 +119,7 @@ class loginstate extends State<login>{
              );
              if(user!=null){
               print("işlem başarılı");
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>anaSayfa()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>mainPage()));
              }
             } on FirebaseAuthException catch(e){
                if (e.code == 'user-not-found') {

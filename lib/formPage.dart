@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:formapp/anaSayfa.dart';
-import 'package:formapp/login.dart';
+import 'package:formapp/mainPage.dart';
+
 
 
 class formPage extends StatefulWidget{
@@ -28,24 +28,24 @@ Widget build(BuildContext context) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _adSoyad(),
+        nameAndSurname(),
         SizedBox(height:10),
-        _kullaniciAdi(),
+        nickName(),
         SizedBox(height:10),
-         _ePosta(),
+         eMail(),
          SizedBox(height:10),
-         _sifre1(),
+         password(),
          SizedBox(height:10),
-        _girisYap(),
+        login(),
         SizedBox(height: 10,),
-       _uyeOl()
+       register()
     ]
     ),
   ),
   );
 }
 //Ad Soyad
-Widget _adSoyad()=>Container(
+Widget nameAndSurname()=>Container(
    child: Column(
             children: [
                const Row(
@@ -83,7 +83,7 @@ Widget _adSoyad()=>Container(
           ),
 );
 //kullanici Adi
-Widget _kullaniciAdi()=>Container(
+Widget nickName()=>Container(
 child: Column(
             children: [
                const Row(
@@ -120,7 +120,7 @@ child: Column(
           ),
 );
 //E-Posta 
-Widget _ePosta()=>Container(
+Widget eMail()=>Container(
    child: Column(
             children: [
                const Row(
@@ -157,7 +157,7 @@ Widget _ePosta()=>Container(
           ),
 );
 //Sifre
-Widget _sifre1()=>Container(
+Widget password()=>Container(
   child: Column(
             children: [
                const Row(
@@ -196,7 +196,7 @@ Widget _sifre1()=>Container(
 );
 
 //Giriş Yap
-Widget _girisYap()=>Container(
+Widget  login()=>Container(
  child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -212,7 +212,7 @@ Widget _girisYap()=>Container(
           ),
 );
 //Üye Ol
-Widget _uyeOl()=>ElevatedButton(
+Widget register()=>ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(200, 40),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))
@@ -227,7 +227,7 @@ Widget _uyeOl()=>ElevatedButton(
             try {
               final user = FirebaseAuth.instance.createUserWithEmailAndPassword(email: e_posta, password: sifre1);
               if(user!=null){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>anaSayfa()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>mainPage()));
               }
 } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
